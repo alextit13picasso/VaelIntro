@@ -49,13 +49,13 @@
       var loaderUrl = buildUrl + "/{{ LOADER_FILENAME }}";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/{{ DATA_FILENAME }}",
-        frameworkUrl: buildUrl + "/{{ FRAMEWORK_FILENAME }}",
-        codeUrl: buildUrl + "/{{ CODE_FILENAME }}",
+        dataUrl: buildUrl + "/Vael_WebGL_Build.data.unityweb",       // Имя .data.unityweb из папки Build
+        frameworkUrl: buildUrl + "/Vael_WebGL_Build.framework.js.unityweb", // Имя .framework.js из папки Build
+        codeUrl: buildUrl + "/Vael_WebGL_Build.wasm.unityweb",           // Имя .wasm из папки Build
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "{{ COMPANY_NAME }}",
-        productName: "{{ PRODUCT_NAME }}",
-        productVersion: "{{ PRODUCT_VERSION }}",
+        companyName: "DefaultCompany",
+        productName: "Vael Intro",
+        productVersion: "0.1.0",
         showBanner: unityShowBanner,
       };
 
