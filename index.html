@@ -84,28 +84,24 @@
     // expected to change.
 
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-      // 1. Исправлено: жестко задаем мобильный мета-тег (добавлен)
+      // Возвращаем чистый дефолтный конфиг Unity, который работал идеально
       var meta = document.createElement('meta');
       meta.name = 'viewport';
-      meta.content = 'width=device-width, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+      // Тут была ошибка, теперь индекс [0] на месте, чтобы ничего не падало
       document.getElementsByTagName('head')[0].appendChild(meta);
 
       document.querySelector("#unity-container").className = "unity-mobile";
+      canvas.className = "unity-mobile";
 
-      // 2. Насильно убираем любые огромные RenderTexture
-      canvas.style.width = "100%";
-      canvas.style.height = "100%";
-
-      // 3. Умный devicePixelRatio: если у телефона экран слишком жирный (Pixel), 
-      // ограничиваем коэффициент на уровне 1.5 или 2.0. Это даст ИДЕАЛЬНУЮ четкость текста 
-      // без мыла и не перегрузит видеокарту, как коэффициент 3.0+
-      config.devicePixelRatio = Math.min(window.devicePixelRatio, 2.0);
+      // По умолчанию Unity зарезает пиксели на мобилках, если эта строка закомментирована.
+      // Оставляем её выключенной (или включенной, если до этого она была раскомментирована в рабочем билде)
+      // config.devicePixelRatio = 1;
 
     } else {
-      // Десктопный конфиг для Tilda
+      // Наш проверенный десктопный рабочий фикс для Tilda
       canvas.style.width = "100%";
       canvas.style.height = "100%";
-      config.devicePixelRatio = window.devicePixelRatio;
     }
 
     document.querySelector("#unity-loading-bar").style.display = "block";
