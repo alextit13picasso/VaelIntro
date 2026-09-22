@@ -59,20 +59,19 @@
         showBanner: unityShowBanner,
       };
 
-      // Проверка устройства и адаптивность
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         var meta = document.createElement('meta');
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         
-        // Исправлено: добавлен индекс [0]
+        // Исправлено железно: индекс на месте, head определится корректно
         document.getElementsByTagName('head')[0].appendChild(meta);
         
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
 
       } else {
-        // Десктопный фикс для Tilda: игра занимает 100% фрейма 430x764
+        // Десктопный фикс для Tilda
         canvas.style.width = "100%";
         canvas.style.height = "100%";
       }
