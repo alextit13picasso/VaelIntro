@@ -46,12 +46,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/{{ LOADER_FILENAME }}";
+      var loaderUrl = buildUrl + "/Vael_WebGL_Build.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/Vael_WebGL_Build.data.unityweb",       // Имя .data.unityweb из папки Build
-        frameworkUrl: buildUrl + "/Vael_WebGL_Build.framework.js.unityweb", // Имя .framework.js из папки Build
-        codeUrl: buildUrl + "/Vael_WebGL_Build.wasm.unityweb",           // Имя .wasm из папки Build
+        dataUrl: buildUrl + "/Vael_WebGL_Build.data.unityweb",
+        frameworkUrl: buildUrl + "/Vael_WebGL_Build.framework.js.unityweb",
+        codeUrl: buildUrl + "/Vael_WebGL_Build.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Vael Intro",
@@ -64,14 +64,12 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         
-        // Исправлено железно: индекс на месте, head определится корректно
         document.getElementsByTagName('head')[0].appendChild(meta);
         
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
 
       } else {
-        // Десктопный фикс для Tilda
         canvas.style.width = "100%";
         canvas.style.height = "100%";
       }
