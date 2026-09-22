@@ -46,16 +46,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/{{{ LOADER_FILENAME }}}";
+      var loaderUrl = buildUrl + "/{{ LOADER_FILENAME }}";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/{{{ DATA_FILENAME }}}",
-        frameworkUrl: buildUrl + "/{{{ FRAMEWORK_FILENAME }}}",
-        codeUrl: buildUrl + "/{{{ CODE_FILENAME }}}",
+        dataUrl: buildUrl + "/{{ DATA_FILENAME }}",
+        frameworkUrl: buildUrl + "/{{ FRAMEWORK_FILENAME }}",
+        codeUrl: buildUrl + "/{{ CODE_FILENAME }}",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "{{{ COMPANY_NAME }}}",
-        productName: "{{{ PRODUCT_NAME }}}",
-        productVersion: "{{{ PRODUCT_VERSION }}}",
+        companyName: "{{ COMPANY_NAME }}",
+        productName: "{{ PRODUCT_NAME }}",
+        productVersion: "{{ PRODUCT_VERSION }}",
         showBanner: unityShowBanner,
       };
 
@@ -65,7 +65,7 @@
         meta.name = 'viewport';
         meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
         
-        // Исправлено: добавлен индекс, чтобы мета-тег реально применился и не ломал масштаб
+        // Исправлено: добавлен индекс [0]
         document.getElementsByTagName('head')[0].appendChild(meta);
         
         document.querySelector("#unity-container").className = "unity-mobile";
