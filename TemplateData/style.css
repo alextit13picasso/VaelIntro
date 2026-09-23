@@ -1,0 +1,69 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    overflow: hidden;
+}
+
+/* Контейнер всегда подстраивается под размеры iFrame */
+#unity-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+/* Десктопный холст */
+#unity-canvas {
+    background: #231F20;
+    display: block;
+}
+
+/* Мобильный холст */
+.unity-mobile #unity-canvas { 
+    width: 100%; 
+    height: 100%; 
+}
+
+/* Намертво убираем футер Unity, чтобы освободить место */
+#unity-footer {
+    display: none !important;
+}
+
+/* Полоса загрузки */
+#unity-loading-bar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#unity-logo { 
+    display: none !important; 
+}
+#unity-progress-bar-empty { 
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1); /* Едва заметная серая подложка */
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+#unity-progress-bar-full { 
+    width: 0%; 
+    height: 100%; 
+    background-color: #D9D2C5; /* Тот самый благородный винтажный цвет */
+    transition: width 0.2s ease;
+}
+#unity-warning { 
+    position: absolute; 
+    left: 50%; 
+    top: 5%; 
+    transform: translate(-50%); 
+    background: white; 
+    padding: 10px; 
+    display: none; 
+}
