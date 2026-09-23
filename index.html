@@ -27,7 +27,7 @@
     // Заглушка для предупреждений стриминга WASM, чтобы не пугать пользователей плашками
     function unityShowBanner(msg, type) {
       if (msg.indexOf("instantiateStreaming") !== -1 || msg.indexOf("streaming compilation failed") !== -1) {
-        return; 
+        return;
       }
       var warningBanner = document.querySelector("#unity-warning");
       var div = document.createElement('div');
@@ -41,16 +41,16 @@
     var loaderUrl = buildUrl + "/Vael_WebGL_Build.loader.js";
     var config = {
       arguments: [],
-      // Возвращаем твои оригинальные имена файлов БЕЗ расширений .unityweb и .br
-      dataUrl: buildUrl + "/Vael_WebGL_Build.data",
-      frameworkUrl: buildUrl + "/Vael_WebGL_Build.framework.js",
-      codeUrl: buildUrl + "/Vael_WebGL_Build.wasm",
+      dataUrl: buildUrl + "/Build.data",
+      frameworkUrl: buildUrl + "/Build.framework.js",
+      codeUrl: buildUrl + "/Build.wasm",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "Vael",
       productName: "Vael Intro",
       productVersion: "0.1.0",
       showBanner: unityShowBanner,
     };
+
 
     if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
       var meta = document.createElement('meta');
