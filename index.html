@@ -39,10 +39,9 @@
 
     var buildUrl = "Build";
     var loaderUrl = buildUrl + "/Vael_WebGL_Build.loader.js";
-    
-    // Конфигурация под несжатый билд (Disabled) — без расширений .br и .unityweb
     var config = {
       arguments: [],
+      // Возвращаем твои оригинальные имена файлов БЕЗ расширений .unityweb и .br
       dataUrl: buildUrl + "/Vael_WebGL_Build.data",
       frameworkUrl: buildUrl + "/Vael_WebGL_Build.framework.js",
       codeUrl: buildUrl + "/Vael_WebGL_Build.wasm",
