@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -8,10 +7,9 @@
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
 </head>
-
 <body>
   <div id="unity-container" class="unity-desktop">
-    <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1"></canvas>
+    <canvas id="unity-canvas" width="1080" height="1920" tabindex="-1"></canvas>
     <div id="unity-loading-bar">
       <div id="unity-logo"></div>
       <div id="unity-progress-bar-empty">
@@ -19,31 +17,21 @@
       </div>
     </div>
     <div id="unity-warning"> </div>
-    <div id="unity-footer">
-      <div id="unity-logo-title-footer"></div>
-      <div id="unity-fullscreen-button"></div>
-      <div id="unity-build-title">Vael Intro</div>
-    </div>
   </div>
+
   <script>
     var canvas = document.querySelector("#unity-canvas");
 
     function unityShowBanner(msg, type) {
-      var warningBanner = document.querySelector("#unity-warning");
-      function updateBannerVisibility() {
-        warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+      // Глушим ворнинги стриминга, чтобы не пугать читателей
+      if (msg.indexOf("instantiateStreaming") !== -1 || msg.indexOf("streaming compilation failed") !== -1) {
+        return;
       }
+      var warningBanner = document.querySelector("#unity-warning");
       var div = document.createElement('div');
       div.innerHTML = msg;
       warningBanner.appendChild(div);
       if (type == 'error') div.style = 'background: red; padding: 10px;';
-      else {
-        if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-        setTimeout(function () {
-          warningBanner.removeChild(div);
-          updateBannerVisibility();
-        }, 5000);
-      }
       updateBannerVisibility();
     }
 
@@ -65,13 +53,9 @@
       var meta = document.createElement('meta');
       meta.name = 'viewport';
       meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-
       document.getElementsByTagName('head')[0].appendChild(meta);
-
       document.querySelector("#unity-container").className = "unity-mobile";
       canvas.className = "unity-mobile";
-
-      // config.devicePixelRatio = 1;
     } else {
       canvas.style.width = "100%";
       canvas.style.height = "100%";
@@ -79,13 +63,17 @@
 
     document.querySelector("#unity-loading-bar").style.display = "block";
 
+    // ИНТЕГРАЦИЯ ДЕКОМПРЕССОРА ДЛЯ GITHUB PAGES
     var script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
-      // Костыль для статических хостингов (GitHub Pages):
-      // Явно указываем браузеру, что файлы сжаты Brotli, чтобы включить нативный стриминг
-      if (config.codeUrl.endsWith(".br")) {
-        config.webglContextAttributes = { preserveDrawingBuffer: false, powerPreference: "high-performance" };
+      // Переопределяем системную функцию загрузки Unity, чтобы она умела читать .br на статических хостингах
+      if (typeof UnityLoader !== "undefined" && UnityLoader.compressions) {
+        UnityLoader.compressions.br = {
+          decompress: function (data) {
+            return typeof BrotliDecode !== "undefined" ? BrotliDecode(data) : data;
+          }
+        };
       }
 
       createUnityInstance(canvas, config, (progress) => {
@@ -99,5 +87,4 @@
     document.body.appendChild(script);
   </script>
 </body>
-
 </html>
