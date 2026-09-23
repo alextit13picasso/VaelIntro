@@ -45,7 +45,25 @@ html, body {
     display: none !important; 
 }
 #unity-progress-bar-empty { 
-    display: none !important; 
+    width: 200px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1); /* Едва заметная серая подложка */
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 10px;
 }
-#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-dark.png') no-repeat center }
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+#unity-progress-bar-full { 
+    width: 0%; 
+    height: 100%; 
+    background-color: #D9D2C5; /* Тот самый благородный винтажный цвет */
+    transition: width 0.2s ease;
+}
+#unity-warning { 
+    position: absolute; 
+    left: 50%; 
+    top: 5%; 
+    transform: translate(-50%); 
+    background: white; 
+    padding: 10px; 
+    display: none; 
+}
